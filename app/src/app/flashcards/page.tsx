@@ -19,6 +19,8 @@ export default function FlashcardsPage() {
   const [gotIt, setGotIt] = useState(0)
   const [reviewed, setReviewed] = useState(0)
   const [sessionDone, setSessionDone] = useState(false)
+  const [round, setRound] = useState(1)
+  const [reviewPile, setReviewPile] = useState<Question[]>([])
 
   const filteredQuestions = useMemo(() => {
     if (filter.type === 'all') return ALL_QUESTIONS
@@ -32,11 +34,9 @@ export default function FlashcardsPage() {
     return ALL_QUESTIONS
   }, [filter])
 
-  // Shuffle and reset when filter changes
   useEffect(() => {
     const progress = loadFlashcardProgress()
     const shuffled = shuffle([...filteredQuestions])
-    // prioritize cards marked "review"
     const reviewIds = new Set(
       Object.entries(progress)
         .filter(([, v]) => v === 'review')
@@ -51,6 +51,8 @@ export default function FlashcardsPage() {
     setGotIt(0)
     setReviewed(0)
     setSessionDone(false)
+    setRound(1)
+    setReviewPile([])
   }, [filter, filteredQuestions])
 
   function handleRate(rating: 'got-it' | 'review') {
@@ -61,20 +63,43 @@ export default function FlashcardsPage() {
     if (rating === 'got-it') setGotIt((n) => n + 1)
     setReviewed((n) => n + 1)
 
-    if (index + 1 >= deck.length) {
-      setSessionDone(true)
+    const nextReviewPile = rating === 'review' ? [...reviewPile, deck[index]] : reviewPile
+    const isLastCard = index + 1 >= deck.length
+
+    if (isLastCard) {
+      if (nextReviewPile.length > 0 && round === 1) {
+        setRound(2)
+        setDeck(shuffle([...nextReviewPile]))
+        setReviewPile([])
+        setIndex(0)
+      } else {
+        setSessionDone(true)
+      }
     } else {
+      setReviewPile(nextReviewPile)
       setIndex((i) => i + 1)
     }
   }
 
   function handleRestart() {
-    const shuffled = shuffle([...deck])
-    setDeck(shuffled)
+    const progress = loadFlashcardProgress()
+    const shuffled = shuffle([...filteredQuestions])
+    const reviewIds = new Set(
+      Object.entries(progress)
+        .filter(([, v]) => v === 'review')
+        .map(([k]) => k)
+    )
+    const prioritized = [
+      ...shuffled.filter((q) => reviewIds.has(q.id)),
+      ...shuffled.filter((q) => !reviewIds.has(q.id)),
+    ]
+    setDeck(prioritized)
     setIndex(0)
     setGotIt(0)
     setReviewed(0)
     setSessionDone(false)
+    setRound(1)
+    setReviewPile([])
   }
 
   const pctCorrect = reviewed > 0 ? Math.round((gotIt / reviewed) * 100) : 0
@@ -97,16 +122,24 @@ export default function FlashcardsPage() {
         cardCount={filteredQuestions.length}
       />
 
-      {/* Session progress */}
-      {reviewed > 0 && !sessionDone && (
+      {/* Round indicator */}
+      {!sessionDone && deck.length > 0 && (
         <div className="flex items-center gap-4 font-mono text-xs text-text-muted">
           <span>
-            <span className="text-text-primary">{index + 1}</span> / {deck.length}
+            ◉ Round {round} — {round === 1 ? 'full deck' : 'review-only'}
           </span>
-          <span>·</span>
-          <span className="text-success">{gotIt} got it</span>
-          <span>·</span>
-          <span className="text-error">{reviewed - gotIt} review</span>
+          {reviewed > 0 && (
+            <>
+              <span>·</span>
+              <span>
+                <span className="text-text-primary">{index + 1}</span> / {deck.length}
+              </span>
+              <span>·</span>
+              <span className="text-success">{gotIt} got it</span>
+              <span>·</span>
+              <span className="text-error">{reviewed - gotIt} review</span>
+            </>
+          )}
         </div>
       )}
 
@@ -149,7 +182,7 @@ export default function FlashcardsPage() {
         <div className="h-1 rounded-full bg-bg-tertiary overflow-hidden">
           <div
             className="h-full rounded-full bg-accent-green transition-all duration-300"
-            style={{ width: `${((index) / deck.length) * 100}%` }}
+            style={{ width: `${(index / deck.length) * 100}%` }}
           />
         </div>
       )}

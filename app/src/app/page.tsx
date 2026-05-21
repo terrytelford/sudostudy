@@ -8,10 +8,10 @@ export default function HomePage() {
       <section className="flex flex-col gap-6 pt-8">
         <div className="flex flex-col gap-3">
           <p className="font-mono text-accent-green text-sm">
-            $ CompTIA Security+ SY0-701 Prep_
+            &gt; CompTIA Security+ SY0-701 Prep_
           </p>
           <h1 className="font-mono text-4xl sm:text-5xl font-bold text-text-primary leading-tight">
-            Pass the Security+<br />
+            Pass the CompTIA Security+ Exam<br />
             <span className="text-accent-green">on your first try.</span>
           </h1>
           <p className="text-text-muted text-base leading-relaxed max-w-xl">

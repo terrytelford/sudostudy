@@ -8,6 +8,8 @@ import type { GlossaryTerm } from '@/types'
 
 const CATEGORIES = Array.from(new Set(glossaryTerms.map((t) => t.category))).sort()
 
+const displayLabel = (t: GlossaryTerm) => t.acronym || t.term
+
 export default function GlossarySearch() {
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
@@ -23,16 +25,16 @@ export default function GlossarySearch() {
         items = items.filter((t) => t.category === activeCategory)
       }
       if (activeLetter) {
-        items = items.filter((t) => t.term[0].toUpperCase() === activeLetter)
+        items = items.filter((t) => displayLabel(t)[0].toUpperCase() === activeLetter)
       }
-      items = [...items].sort((a, b) => a.term.localeCompare(b.term))
+      items = [...items].sort((a, b) => displayLabel(a).localeCompare(displayLabel(b)))
     }
 
     return items
   }, [query, activeCategory, activeLetter])
 
   const letters = useMemo(
-    () => Array.from(new Set(glossaryTerms.map((t) => t.term[0].toUpperCase()))).sort(),
+    () => Array.from(new Set(glossaryTerms.map((t) => displayLabel(t)[0].toUpperCase()))).sort(),
     []
   )
 
@@ -41,7 +43,7 @@ export default function GlossarySearch() {
       {/* Search input */}
       <div className="relative">
         <span className="absolute left-4 top-1/2 -translate-y-1/2 font-mono text-accent-green text-sm select-none">
-          $
+          &gt;
         </span>
         <input
           type="text"

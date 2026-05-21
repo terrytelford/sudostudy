@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
             <p className="font-mono text-text-primary font-semibold">
-              <span className="text-accent-green">$</span> SudoStudy
+              <span className="text-accent-green">&gt;</span> SudoStudy
             </p>
             <p className="text-text-muted text-sm mt-1">
               CompTIA Security+ SY0-701 study resource. Not affiliated with CompTIA.
