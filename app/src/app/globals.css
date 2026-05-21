@@ -31,13 +31,15 @@ body {
 .flip-card {
   transform-style: preserve-3d;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  display: grid;
 }
 .flip-card.flipped { transform: rotateY(180deg); }
 .flip-card-front,
 .flip-card-back {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  grid-row: 1;
+  grid-column: 1;
 }
 .flip-card-back { transform: rotateY(180deg); }
 
