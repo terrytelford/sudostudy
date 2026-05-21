@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { searchGlossary } from '@/lib/search'
+import { searchTerms } from '@/lib/search'
 import GlossaryEntry from './GlossaryEntry'
 import glossaryTerms from '@/data/glossary'
 import type { GlossaryTerm } from '@/types'
@@ -17,7 +17,7 @@ export default function GlossarySearch() {
     let items = glossaryTerms
 
     if (query.trim().length > 0) {
-      items = searchGlossary(query)
+      items = searchTerms(query, glossaryTerms)
     } else {
       if (activeCategory) {
         items = items.filter((t) => t.category === activeCategory)
