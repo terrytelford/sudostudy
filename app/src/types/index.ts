@@ -44,22 +44,26 @@ export type GlossaryCategory =
 
 export interface ExamSession {
   examId: string
+  questions: Question[]
   answers: Record<string, AnswerKey | null>
   startedAt: number
   completedAt?: number
   currentQuestion: number
+  timeRemaining?: number
+  timed: boolean
 }
 
 export interface ExamResult {
   examId: string
-  totalQuestions: number
-  correctCount: number
   score: number
   passed: boolean
-  domainScores: Record<SecurityPlusDomain, { correct: number; total: number }>
-  answers: Record<string, { userAnswer: AnswerKey | null; correct: boolean }>
+  scaledScore: number
+  totalQuestions: number
+  correctAnswers: number
+  domainScores: Record<SecurityPlusDomain, number>
   completedAt: number
-  timeSpentSeconds: number
+  answers: Record<string, AnswerKey | null>
+  questions: Question[]
 }
 
 export interface FlashcardProgress {

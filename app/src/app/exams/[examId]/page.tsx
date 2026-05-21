@@ -13,7 +13,7 @@ import {
   setAnswer,
 } from '@/lib/exam-state'
 import { shuffle, scoreToScaled } from '@/lib/utils'
-import { PASSING_SCORE, DOMAIN_WEIGHTS } from '@/types'
+import { PASSING_SCORE } from '@/types'
 import type { ExamSession, AnswerKey, SecurityPlusDomain } from '@/types'
 
 const TIMER_SECONDS = 90 * 60
@@ -23,6 +23,7 @@ export default function ActiveExamPage() {
   const router = useRouter()
   const exam = getExamById(examId)
 
+  const [started, setStarted] = useState(false)
   const [session, setSession] = useState<ExamSession | null>(null)
   const [currentIdx, setCurrentIdx] = useState(0)
   const [timeRemaining, setTimeRemaining] = useState<number>(TIMER_SECONDS)
@@ -30,7 +31,7 @@ export default function ActiveExamPage() {
   const [submitted, setSubmitted] = useState(false)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Load or create session
+  // Check for an existing in-progress session on mount
   useEffect(() => {
     if (!exam) return
     const saved = loadSession(examId)
@@ -38,21 +39,10 @@ export default function ActiveExamPage() {
       setSession(saved)
       setCurrentIdx(saved.currentQuestion)
       setTimeRemaining(saved.timeRemaining ?? TIMER_SECONDS)
-    } else {
-      const shuffled = shuffle([...exam.questions])
-      const newSession: ExamSession = {
-        examId,
-        questions: shuffled,
-        answers: {},
-        startedAt: Date.now(),
-        currentQuestion: 0,
-        timeRemaining: TIMER_SECONDS,
-      }
-      setSession(newSession)
-      saveSession(examId, newSession)
+      setStarted(true)
+      if (saved.timed) setTimerActive(true)
     }
-    setTimerActive(true)
-  }, [examId, exam])
+  }, [examId, exam]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Timer
   useEffect(() => {
@@ -73,15 +63,32 @@ export default function ActiveExamPage() {
   // Persist time remaining
   useEffect(() => {
     if (!session) return
-    const updated = { ...session, timeRemaining }
-    saveSession(examId, updated)
-  }, [timeRemaining])
+    saveSession({ ...session, timeRemaining })
+  }, [timeRemaining]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  function handleStart(timed: boolean) {
+    if (!exam) return
+    const shuffled = shuffle([...exam.questions])
+    const newSession: ExamSession = {
+      examId,
+      questions: shuffled,
+      answers: {},
+      startedAt: Date.now(),
+      currentQuestion: 0,
+      timeRemaining: TIMER_SECONDS,
+      timed,
+    }
+    setSession(newSession)
+    saveSession(newSession)
+    setStarted(true)
+    if (timed) setTimerActive(true)
+  }
 
   const handleAnswer = useCallback(
     (key: AnswerKey) => {
       if (!session) return
       const questionId = session.questions[currentIdx].id
-      const updated = setAnswer(examId, session, questionId, key)
+      const updated = setAnswer(session, questionId, key)
       setSession(updated)
     },
     [session, currentIdx, examId]
@@ -93,7 +100,7 @@ export default function ActiveExamPage() {
     setCurrentIdx(next)
     const updated = { ...session, currentQuestion: next }
     setSession(updated)
-    saveSession(examId, updated)
+    saveSession(updated)
   }, [session, currentIdx, examId])
 
   const handleSubmit = useCallback(() => {
@@ -101,7 +108,6 @@ export default function ActiveExamPage() {
     clearInterval(timerRef.current!)
     setSubmitted(true)
 
-    // Calculate score
     let correct = 0
     const domainCorrect: Record<string, number> = {}
     const domainTotal: Record<string, number> = {}
@@ -136,25 +142,59 @@ export default function ActiveExamPage() {
       questions: session.questions,
     }
 
-    saveResult(examId, result)
+    saveResult(result)
     clearSession(examId)
     router.push(`/exams/${examId}/results`)
   }, [session, submitted, examId, router])
 
   if (!exam) {
+    return <p className="font-mono text-error text-center py-16">Exam not found.</p>
+  }
+
+  // Start screen — shown for new exams only (resuming skips this)
+  if (!started) {
     return (
-      <p className="font-mono text-error text-center py-16">
-        Exam not found.
-      </p>
+      <div className="max-w-2xl mx-auto flex flex-col gap-8">
+        <div className="flex flex-col gap-2">
+          <p className="font-mono text-accent-green text-xs uppercase tracking-widest">
+            {exam.title}
+          </p>
+          <h1 className="font-mono text-2xl font-bold text-text-primary">{exam.subtitle}</h1>
+          <p className="text-text-muted text-sm">{exam.description}</p>
+        </div>
+
+        <div className="rounded-xl border border-border bg-bg-secondary p-6 flex flex-col gap-4">
+          <p className="font-mono text-sm text-text-primary font-semibold">Choose your mode</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <button
+              onClick={() => handleStart(true)}
+              className="flex flex-col gap-2 rounded-lg border border-accent-green/40 bg-bg-primary p-5 text-left hover:border-accent-green hover:bg-accent-green/5 transition-colors group"
+            >
+              <span className="font-mono text-sm font-semibold text-accent-green">Timed</span>
+              <span className="text-xs text-text-muted leading-relaxed">
+                90-minute countdown, just like the real exam. Auto-submits when time runs out.
+              </span>
+            </button>
+            <button
+              onClick={() => handleStart(false)}
+              className="flex flex-col gap-2 rounded-lg border border-accent-cyan/40 bg-bg-primary p-5 text-left hover:border-accent-cyan hover:bg-accent-cyan/5 transition-colors group"
+            >
+              <span className="font-mono text-sm font-semibold text-accent-cyan">Untimed</span>
+              <span className="text-xs text-text-muted leading-relaxed">
+                No time limit. Study at your own pace without the pressure.
+              </span>
+            </button>
+          </div>
+          <p className="font-mono text-xs text-text-muted">
+            {exam.questions.length} questions · passing score 750/900
+          </p>
+        </div>
+      </div>
     )
   }
 
   if (!session) {
-    return (
-      <p className="font-mono text-text-muted text-center py-16 animate-pulse">
-        Loading exam...
-      </p>
-    )
+    return <p className="font-mono text-text-muted text-center py-16 animate-pulse">Loading exam...</p>
   }
 
   const currentQuestion = session.questions[currentIdx]
@@ -165,11 +205,9 @@ export default function ActiveExamPage() {
   return (
     <div className="flex flex-col gap-8 max-w-2xl mx-auto">
       <div className="flex items-center justify-between">
-        <div>
-          <p className="font-mono text-xs text-text-muted uppercase tracking-widest">
-            {exam.title} — {exam.subtitle}
-          </p>
-        </div>
+        <p className="font-mono text-xs text-text-muted uppercase tracking-widest">
+          {exam.title} — {exam.subtitle}
+        </p>
         <button
           onClick={() => {
             if (confirm('Submit the exam now? Unanswered questions will be marked wrong.')) {
@@ -186,7 +224,7 @@ export default function ActiveExamPage() {
         current={currentIdx + 1}
         total={session.questions.length}
         answered={answeredCount}
-        timeRemaining={timeRemaining}
+        timeRemaining={session.timed ? timeRemaining : null}
       />
 
       <ExamQuestion
