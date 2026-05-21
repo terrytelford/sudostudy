@@ -29,18 +29,21 @@ export interface GlossaryTerm {
 }
 
 export type GlossaryCategory =
-  | 'cryptography'
-  | 'network-security'
-  | 'access-control'
-  | 'threats-attacks'
-  | 'identity-management'
-  | 'cloud-security'
-  | 'compliance'
-  | 'incident-response'
-  | 'physical-security'
-  | 'protocols'
-  | 'tools'
-  | 'architecture'
+  | 'Access Control'
+  | 'Application Security'
+  | 'Cloud Security'
+  | 'Compliance'
+  | 'Concepts'
+  | 'Cryptography'
+  | 'Frameworks'
+  | 'Identity & Access'
+  | 'Network Security'
+  | 'Risk & Compliance'
+  | 'Security Assessment'
+  | 'Security Controls'
+  | 'Security Operations'
+  | 'Threats'
+  | 'Vulnerabilities'
 
 export interface ExamSession {
   examId: string
@@ -67,7 +70,7 @@ export interface ExamResult {
 }
 
 export interface FlashcardProgress {
-  [questionId: string]: 'unseen' | 'known' | 'review'
+  [questionId: string]: 'got-it' | 'review'
 }
 
 export interface ExamMeta {
