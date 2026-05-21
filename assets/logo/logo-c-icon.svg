@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" fill="none">
+  <!-- Option C Icon: Shield badge on dark background -->
+  <rect width="56" height="56" rx="10" fill="#0d1117"/>
+
+  <!-- Shield -->
+  <path d="M28 5 L48 14 L48 34 Q48 48 28 53 Q8 48 8 34 L8 14 Z" fill="#161b22" stroke="#00ff88" stroke-width="2.5"/>
+
+  <!-- "sudo" text inside shield -->
+  <text x="28" y="28" font-family="JetBrains Mono, Courier New, monospace" font-size="8" font-weight="700" fill="#00ff88" text-anchor="middle" letter-spacing="0.5">sudo</text>
+
+  <!-- Up arrow -->
+  <path d="M28 33 L23 40 L26 40 L26 46 L30 46 L30 40 L33 40 Z" fill="#00ff88"/>
+</svg>

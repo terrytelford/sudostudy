@@ -1,0 +1,27 @@
+# Next.js
+app/.next/
+app/out/
+app/node_modules/
+
+# Build
+app/build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Claude Code local
+.claude/

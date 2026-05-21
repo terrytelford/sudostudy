@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" fill="none">
+  <!-- Option B Icon: Bracket Lock on dark background -->
+  <rect width="56" height="56" rx="10" fill="#0d1117"/>
+
+  <!-- Left bracket -->
+  <text x="2" y="46" font-family="JetBrains Mono, Courier New, monospace" font-size="46" font-weight="700" fill="#00d4ff">[</text>
+
+  <!-- Right bracket -->
+  <text x="40" y="46" font-family="JetBrains Mono, Courier New, monospace" font-size="46" font-weight="700" fill="#00d4ff">]</text>
+
+  <!-- Lock shackle (mini) -->
+  <path d="M22 24 V19 Q22 13 28 13 Q34 13 34 19 V24" stroke="#f0f6fc" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Lock body -->
+  <rect x="18" y="24" width="20" height="15" rx="3" fill="#f0f6fc"/>
+  <!-- Keyhole -->
+  <circle cx="28" cy="30" r="3" fill="#0d1117"/>
+  <rect x="26.5" y="30" width="3" height="5" rx="1.5" fill="#0d1117"/>
+</svg>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SudoStudy Logo Options</title>
+<style>
+  body { background: #0d1117; color: #f0f6fc; font-family: 'JetBrains Mono', monospace; padding: 40px; margin: 0; }
+  h1 { color: #00ff88; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px; }
+  .options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+  .option { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 32px; }
+  .option h2 { color: #00d4ff; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 8px; }
+  .option p { color: #8b949e; font-size: 11px; margin: 0 0 24px; line-height: 1.6; }
+  .logo-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .logo-box { background: #0d1117; border: 1px solid #21262d; border-radius: 8px; padding: 20px; }
+  .logo-box label { display: block; color: #8b949e; font-size: 10px; margin-bottom: 8px; }
+  .logo-box img { display: block; height: 48px; }
+  .icon-box img { height: 56px; width: 56px; }
+  .on-light { background: #ffffff; }
+  .on-light img { filter: none; }
+  h3 { color: #8b949e; font-size: 11px; margin: 24px 0 12px; letter-spacing: 1px; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<h1>&gt; SudoStudy Logo Options — open in browser to preview</h1>
+
+<div class="options">
+
+  <div class="option">
+    <h2>Option A</h2>
+    <p>Terminal Prompt Wordmark<br>$ SudoStudy_ with blinking cursor.<br>Pure hacker signal, minimal.</p>
+    <div class="logo-row">
+      <div class="logo-box">
+        <label>Full (on dark)</label>
+        <img src="logo-a-full.svg" alt="Logo A Full">
+      </div>
+      <div class="logo-box icon-box">
+        <label>Icon</label>
+        <img src="logo-a-icon.svg" alt="Logo A Icon">
+      </div>
+    </div>
+  </div>
+
+  <div class="option">
+    <h2>Option B</h2>
+    <p>Bracket Lock Icon + Wordmark<br>[lock] SudoStudy in cyan brackets.<br>Dual meaning: code + security.</p>
+    <div class="logo-row">
+      <div class="logo-box">
+        <label>Full (on dark)</label>
+        <img src="logo-b-full.svg" alt="Logo B Full">
+      </div>
+      <div class="logo-box icon-box">
+        <label>Icon</label>
+        <img src="logo-b-icon.svg" alt="Logo B Icon">
+      </div>
+    </div>
+  </div>
+
+  <div class="option">
+    <h2>Option C</h2>
+    <p>Elevated Shield Badge<br>Shield with "sudo" + up arrow.<br>Certification badge feel.</p>
+    <div class="logo-row">
+      <div class="logo-box">
+        <label>Full (on dark)</label>
+        <img src="logo-c-full.svg" alt="Logo C Full">
+      </div>
+      <div class="logo-box icon-box">
+        <label>Icon</label>
+        <img src="logo-c-icon.svg" alt="Logo C Icon">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="color:#8b949e;font-size:11px;margin-top:40px;">
+  Files: logo-a-full.svg / logo-a-icon.svg / logo-b-full.svg / logo-b-icon.svg / logo-c-full.svg / logo-c-icon.svg<br>
+  Tell Terry which one you want and the chosen logo moves to app/public/logo.svg
+</p>
+</body>
+</html>

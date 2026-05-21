@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 56" fill="none">
+  <!-- Option B: Bracket Lock Icon + Wordmark (horizontal) -->
+
+  <!-- Left bracket -->
+  <text x="0" y="44" font-family="JetBrains Mono, Courier New, monospace" font-size="44" font-weight="700" fill="#00d4ff">[</text>
+
+  <!-- Lock icon (SVG path centered between brackets) -->
+  <g transform="translate(28, 8)">
+    <!-- Lock shackle -->
+    <path d="M10 18 V12 Q10 4 18 4 Q26 4 26 12 V18" stroke="#f0f6fc" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <!-- Lock body -->
+    <rect x="4" y="18" width="28" height="22" rx="4" fill="#f0f6fc"/>
+    <!-- Keyhole -->
+    <circle cx="18" cy="27" r="4" fill="#0d1117"/>
+    <rect x="16" y="27" width="4" height="7" rx="2" fill="#0d1117"/>
+  </g>
+
+  <!-- Right bracket -->
+  <text x="58" y="44" font-family="JetBrains Mono, Courier New, monospace" font-size="44" font-weight="700" fill="#00d4ff">]</text>
+
+  <!-- Wordmark -->
+  <text x="90" y="42" font-family="JetBrains Mono, Courier New, monospace" font-size="36" font-weight="700" fill="#f0f6fc">SudoStudy</text>
+</svg>
