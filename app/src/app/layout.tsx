@@ -34,6 +34,7 @@ export const metadata: Metadata = {
     description: 'Free CompTIA Security+ SY0-701 practice exams, interactive flashcards, and cybersecurity glossary.',
   },
   robots: { index: true, follow: true },
+  other: { 'impact-site-verification': '54b14d4a-df41-41fa-9092-de8a1d823b31' },
   manifest: '/manifest.json',
   themeColor: '#0d1117',
   icons: { icon: '/favicon.gif' },
