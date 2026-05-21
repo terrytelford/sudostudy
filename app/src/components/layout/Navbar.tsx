@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
@@ -18,14 +17,9 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-bg-primary/95 backdrop-blur border-b border-border">
       <nav className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         <Link href="/" className="flex items-center group">
-          <Image
-            src="/logo.png"
-            alt="SudoStudy"
-            width={140}
-            height={40}
-            priority
-            className="h-8 w-auto"
-          />
+          <span className="font-mono text-text-primary font-semibold">
+            <span className="text-accent-green">&gt;</span> SudoStudy
+          </span>
         </Link>
 
         <div className="flex items-center gap-1">

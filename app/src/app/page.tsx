@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import AdSlot from '@/components/ads/AdSlot'
+import RecommendedResources from '@/components/resources/RecommendedResources'
 
 export default function HomePage() {
   return (
@@ -98,6 +99,8 @@ export default function HomePage() {
           Questions distributed proportionally across all exams.
         </p>
       </section>
+
+      <RecommendedResources />
 
       {/* Bottom ad */}
       <AdSlot type="inline" />
