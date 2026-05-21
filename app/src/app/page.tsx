@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import AdSlot from '@/components/ads/AdSlot'
+import AffiliateBanner from '@/components/ads/AffiliateBanner'
 import RecommendedResources from '@/components/resources/RecommendedResources'
 
 export default function HomePage() {
@@ -36,8 +36,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Ad banner */}
-      <AdSlot type="banner" />
+      <AffiliateBanner
+        tag="Hardware"
+        tagColor="cyan"
+        title="YubiKey Security Key"
+        description="Touch to verify. No app, no code, no phone. The MFA hardware used by security professionals."
+        price="$41–$137"
+        cta="View on Amazon"
+        href="https://www.amazon.ca/stores/page/12C906A0-DCE4-44D9-B3C8-6072418D073D?_encoding=UTF8&pd_rd_plhdr=t&pd_rd_i=B07HBCTYP1&store_ref=SBV_A03446803C0Z2Y0CIRBQ5-A042588835L5YGIX5JXSR&lp_asins=B07HBCTYP1&pd_rd_w=P1jWc&content-id=amzn1.sym.4d83b9b7-b781-428b-aa24-c9ca5f477ffc%3Aamzn1.sym.4d83b9b7-b781-428b-aa24-c9ca5f477ffc&pf_rd_p=4d83b9b7-b781-428b-aa24-c9ca5f477ffc&pf_rd_r=X1MZTS19YSPH3BETVRG1&pd_rd_wg=LBxLf&pd_rd_r=c2c957ef-19c9-4e25-87c6-0afb891191a1&linkCode=ll2&tag=terrytelford-20&linkId=eb45cafed5ec0fe53d4fa3845d530c47&ref_=as_li_ss_tl"
+      />
 
       {/* Feature cards */}
       <section className="flex flex-col gap-6">
@@ -102,8 +109,15 @@ export default function HomePage() {
 
       <RecommendedResources />
 
-      {/* Bottom ad */}
-      <AdSlot type="inline" />
+      <AffiliateBanner
+        tag="Book"
+        tagColor="green"
+        title="CompTIA Security+ SY0-701 Study Guide with Practice Tests"
+        description="The official Sybex guide. Covers all five domains with 1,000+ practice questions and full exams."
+        price="~$35"
+        cta="View on Amazon"
+        href="https://www.amazon.ca/Security-Practice-Tests-SY0-701-CertMike/dp/B0DHC632CY?dib=eyJ2IjoiMSJ9.cEgxVQi1TTld0XQJF2c_9uxDIeoYZB7MenxI6RkpIrXfIs1olnSGbRmBs9D-P8JrIYbk8r6K7KAvY5-nrso7t6XsqK-DsbcbWyDOsCpxx3fzcFn61aHXNp6iA_k09QVck_IQllmBvJ6zztn_-vRYQVsVqmA6Pj2462XSZ9rx0UKeOZJjD1NK8BNo3xpHAHwt5ZRG70AFhQ7oRdJQOXbcBwC-9CbQY7iqzd3zThXI28o9mECTcpQEYX1IrottiyFYubG7d0uPHnb4qzDxH-fpY6lJFLP_Uapt6x6-8HAls4Q.Q5mYzhrG6civTGe_VmnUIGKUh4H6Bl-8NXDLeoj6W8w&dib_tag=se&keywords=comptia+security+%2B&qid=1779378494&sr=8-38&linkCode=ll2&tag=terrytelford-20&linkId=76cd05d1fa075b7084f11cda24e65b2b&ref_=as_li_ss_tl"
+      />
 
       {/* Disclaimer */}
       <section className="border-t border-border pt-6">
