@@ -46,7 +46,7 @@ const RESOURCES: Resource[] = [
     tag: 'Hardware',
     title: "YubiKey Security Key",
     author: 'Yubico',
-    description: 'No more reaching for your phone to open an app or type a code - simply touch the YubiKey to verify and you're in. Works with all major password managers and MFA apps.',
+    description: "No more reaching for your phone to open an app or type a code - simply touch the YubiKey to verify and you're in. Works with all major password managers and MFA apps.",
     price: '$41 - $137',
     cta: 'View on Amazon',
     href: 'https://www.amazon.ca/stores/page/12C906A0-DCE4-44D9-B3C8-6072418D073D?_encoding=UTF8&pd_rd_plhdr=t&pd_rd_i=B07HBCTYP1&store_ref=SBV_A03446803C0Z2Y0CIRBQ5-A042588835L5YGIX5JXSR&lp_asins=B07HBCTYP1&pd_rd_w=P1jWc&content-id=amzn1.sym.4d83b9b7-b781-428b-aa24-c9ca5f477ffc%3Aamzn1.sym.4d83b9b7-b781-428b-aa24-c9ca5f477ffc&pf_rd_p=4d83b9b7-b781-428b-aa24-c9ca5f477ffc&pf_rd_r=X1MZTS19YSPH3BETVRG1&pd_rd_wg=LBxLf&pd_rd_r=c2c957ef-19c9-4e25-87c6-0afb891191a1&linkCode=ll2&tag=terrytelford-20&linkId=eb45cafed5ec0fe53d4fa3845d530c47&ref_=as_li_ss_tl',

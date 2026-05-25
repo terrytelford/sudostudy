@@ -1,6 +1,14 @@
 'use client'
 
+import { useEffect } from 'react'
 import { cn } from '@/lib/utils'
+import { ADSENSE_CLIENT, ADSENSE_SLOTS } from '@/lib/ads'
+
+declare global {
+  interface Window {
+    adsbygoogle?: Array<Record<string, unknown>>
+  }
+}
 
 interface AdSlotProps {
   type: 'banner' | 'sidebar' | 'inline'
@@ -16,14 +24,27 @@ export default function AdSlot({ type, className, adClient, adSlot }: AdSlotProp
     inline:  'h-20 w-full',
   }
 
-  if (adClient && adSlot) {
+  const adClientId = adClient ?? ADSENSE_CLIENT
+  const adSlotId = adSlot ?? ADSENSE_SLOTS[type]
+
+  useEffect(() => {
+    if (adClientId && adSlotId && typeof window !== 'undefined') {
+      try {
+        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+      } catch (error) {
+        console.warn('Adsense initialization failed:', error)
+      }
+    }
+  }, [adClientId, adSlotId])
+
+  if (adClientId && adSlotId) {
     return (
       <div className={cn('overflow-hidden', sizes[type], className)}>
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
-          data-ad-client={adClient}
-          data-ad-slot={adSlot}
+          data-ad-client={adClientId}
+          data-ad-slot={adSlotId}
           data-ad-format="auto"
           data-full-width-responsive="true"
         />

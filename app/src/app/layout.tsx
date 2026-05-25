@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import AffiliateTopBanner from '@/components/ads/AffiliateTopBanner'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -34,7 +35,6 @@ export const metadata: Metadata = {
     description: 'Free CompTIA Security+ SY0-701 practice exams, interactive flashcards, and cybersecurity glossary.',
   },
   robots: { index: true, follow: true },
-  other: { 'impact-site-verification': '54b14d4a-df41-41fa-9092-de8a1d823b31' },
   manifest: '/manifest.json',
   themeColor: '#0d1117',
   icons: { icon: '/favicon.gif' },
@@ -45,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="min-h-screen flex flex-col bg-bg-primary text-text-primary antialiased">
         <Navbar />
+        <AffiliateTopBanner />
         <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-8">{children}</main>
         <Footer />
       </body>
