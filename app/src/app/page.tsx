@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import AffiliateBanner from '@/components/ads/AffiliateBanner'
+import AffiliateTopBanner from '@/components/ads/AffiliateTopBanner'
 import RecommendedResources from '@/components/resources/RecommendedResources'
 
 export default function HomePage() {
@@ -118,6 +119,8 @@ export default function HomePage() {
         cta="View on Amazon"
         href="https://www.amazon.ca/Security-Practice-Tests-SY0-701-CertMike/dp/B0DHC632CY?dib=eyJ2IjoiMSJ9.cEgxVQi1TTld0XQJF2c_9uxDIeoYZB7MenxI6RkpIrXfIs1olnSGbRmBs9D-P8JrIYbk8r6K7KAvY5-nrso7t6XsqK-DsbcbWyDOsCpxx3fzcFn61aHXNp6iA_k09QVck_IQllmBvJ6zztn_-vRYQVsVqmA6Pj2462XSZ9rx0UKeOZJjD1NK8BNo3xpHAHwt5ZRG70AFhQ7oRdJQOXbcBwC-9CbQY7iqzd3zThXI28o9mECTcpQEYX1IrottiyFYubG7d0uPHnb4qzDxH-fpY6lJFLP_Uapt6x6-8HAls4Q.Q5mYzhrG6civTGe_VmnUIGKUh4H6Bl-8NXDLeoj6W8w&dib_tag=se&keywords=comptia+security+%2B&qid=1779378494&sr=8-38&linkCode=ll2&tag=terrytelford-20&linkId=76cd05d1fa075b7084f11cda24e65b2b&ref_=as_li_ss_tl"
       />
+
+      <AffiliateTopBanner />
 
       {/* Disclaimer */}
       <section className="border-t border-border pt-6">
