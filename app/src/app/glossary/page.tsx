@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import GlossarySearch from '@/components/glossary/GlossarySearch'
-import AdSlot from '@/components/ads/AdSlot'
 import YubiKeySquareAd from '@/components/ads/YubiKeySquareAd'
 
 export const metadata: Metadata = {
@@ -30,7 +29,6 @@ export default function GlossaryPage() {
         {/* Sidebar ads */}
         <aside className="w-full lg:w-64 shrink-0">
           <div className="sticky top-24 flex flex-col gap-6">
-            <AdSlot type="sidebar" />
             <YubiKeySquareAd />
           </div>
         </aside>

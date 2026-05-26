@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { EXAMS } from '@/data/exams'
 import ExamCard from '@/components/exams/ExamCard'
-import AdSlot from '@/components/ads/AdSlot'
 import AffiliateBanner from '@/components/ads/AffiliateBanner'
 import { loadResult } from '@/lib/exam-state'
 
@@ -41,8 +40,6 @@ export default function ExamsPage() {
           </p>
         )}
       </div>
-
-      <AdSlot type="banner" />
 
       <AffiliateBanner
         tag="Hardware"

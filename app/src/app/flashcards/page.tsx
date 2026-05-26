@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { ALL_QUESTIONS, EXAMS } from '@/data/exams'
 import FlashCard from '@/components/flashcards/FlashCard'
 import DeckSelector, { type DeckFilter } from '@/components/flashcards/DeckSelector'
+import AffiliateTopBanner from '@/components/ads/AffiliateTopBanner'
 import { shuffle } from '@/lib/utils'
 import {
   loadFlashcardProgress,
@@ -115,6 +116,8 @@ export default function FlashcardsPage() {
           500 cards drawn from all practice exams. Tap a card to flip.
         </p>
       </div>
+
+      <AffiliateTopBanner />
 
       <DeckSelector
         selected={filter}
