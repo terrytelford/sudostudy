@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -37,6 +38,9 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   themeColor: '#0d1117',
   icons: { icon: '/favicon.gif' },
+  other: {
+    'google-adsense-account': 'ca-pub-5369366415795554',
+  },
 }
 
 const websiteSchema = {
@@ -80,6 +84,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-8">{children}</main>
         <Footer />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5369366415795554"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )
