@@ -1,11 +1,59 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import AffiliateBanner from '@/components/ads/AffiliateBanner'
 import AffiliateTopBanner from '@/components/ads/AffiliateTopBanner'
 import RecommendedResources from '@/components/resources/RecommendedResources'
 
+export const metadata: Metadata = {
+  title: 'SudoStudy - Free CompTIA Security+ SY0-701 Practice Exams',
+  description: 'Free CompTIA Security+ SY0-701 practice exams, interactive flashcards, and cybersecurity glossary. 500 questions across all 5 domains. Pass on your first try.',
+  alternates: { canonical: 'https://sudostudy.online' },
+}
+
+const FAQ_ITEMS = [
+  {
+    question: 'What is the CompTIA Security+ SY0-701 exam?',
+    answer: 'The CompTIA Security+ SY0-701 is an entry-level cybersecurity certification exam that validates foundational security skills. It covers five domains: General Security Concepts, Threats and Vulnerabilities, Security Architecture, Security Operations, and Security Program Management.',
+  },
+  {
+    question: 'How many questions are on the Security+ exam?',
+    answer: 'The Security+ exam has a maximum of 90 questions, including multiple-choice and performance-based questions. The exam must be completed within 90 minutes.',
+  },
+  {
+    question: 'What score do you need to pass the Security+ exam?',
+    answer: 'You need a scaled score of 750 out of 900 (approximately 83%) to pass the CompTIA Security+ SY0-701 exam.',
+  },
+  {
+    question: 'How should I study for the Security+ exam?',
+    answer: 'Effective Security+ study combines practice exams, flashcard review, and hands-on familiarity with concepts. SudoStudy offers 500 practice questions across all five SY0-701 domains, plus a 200-term glossary and interactive flashcards — all free.',
+  },
+  {
+    question: 'Is SudoStudy free to use?',
+    answer: 'Yes. SudoStudy is completely free. No account or payment is required. All 500 practice questions, flashcards, and the glossary are available immediately.',
+  },
+  {
+    question: 'What domains does Security+ SY0-701 cover?',
+    answer: 'Security+ SY0-701 covers five domains: General Security Concepts (12%), Threats, Vulnerabilities and Mitigations (22%), Security Architecture (18%), Security Operations (28%), and Security Program Management and Oversight (20%).',
+  },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+}
+
 export default function HomePage() {
   return (
     <div className="flex flex-col gap-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* Hero */}
       <section className="flex flex-col gap-6 pt-8">
         <div className="flex flex-col gap-3">
@@ -121,6 +169,24 @@ export default function HomePage() {
       />
 
       <AffiliateTopBanner />
+
+      {/* FAQ */}
+      <section className="flex flex-col gap-6">
+        <h2 className="font-mono text-text-muted text-xs uppercase tracking-widest">
+          Frequently asked questions
+        </h2>
+        <div className="flex flex-col divide-y divide-border border border-border rounded-lg bg-bg-secondary">
+          {FAQ_ITEMS.map(({ question, answer }) => (
+            <details key={question} className="group px-5 py-4">
+              <summary className="font-mono text-sm text-text-primary cursor-pointer list-none flex items-center justify-between gap-3">
+                {question}
+                <span className="text-accent-green text-xs shrink-0 group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-text-muted leading-relaxed">{answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
 
       {/* Disclaimer */}
       <section className="border-t border-border pt-6">

@@ -3,8 +3,14 @@ import GlossarySearch from '@/components/glossary/GlossarySearch'
 import YubiKeySquareAd from '@/components/ads/YubiKeySquareAd'
 
 export const metadata: Metadata = {
-  title: 'Cybersecurity Glossary | SudoStudy',
-  description: '200+ cybersecurity terms for CompTIA Security+ SY0-701. Searchable definitions, acronyms, and related concepts.',
+  title: 'Cybersecurity Glossary — 200+ Security+ Terms | SudoStudy',
+  description: '200+ cybersecurity terms for CompTIA Security+ SY0-701. Searchable definitions covering encryption, authentication, network security, threat intelligence, and all SY0-701 domains.',
+  alternates: { canonical: 'https://sudostudy.online/glossary' },
+  openGraph: {
+    title: 'Cybersecurity Glossary — 200+ Security+ Terms',
+    description: 'Searchable definitions for every major cybersecurity term on the CompTIA Security+ SY0-701 exam.',
+    url: 'https://sudostudy.online/glossary',
+  },
 }
 
 export default function GlossaryPage() {

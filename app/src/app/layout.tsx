@@ -39,9 +39,43 @@ export const metadata: Metadata = {
   icons: { icon: '/favicon.gif' },
 }
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'SudoStudy',
+  url: 'https://sudostudy.online',
+  description: 'Free CompTIA Security+ SY0-701 practice exams, flashcards, and glossary.',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://sudostudy.online/glossary?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
+  },
+}
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: 'SudoStudy',
+  url: 'https://sudostudy.online',
+  description: 'Free CompTIA Security+ SY0-701 exam prep — 500 practice questions, flashcards, and a searchable cybersecurity glossary.',
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-bg-primary text-text-primary antialiased">
         <Navbar />
         <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-8">{children}</main>
